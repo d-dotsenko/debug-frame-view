@@ -17,6 +17,7 @@
 		F2D5F812231AD09800B7706B /* DebugFrameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5F811231AD09800B7706B /* DebugFrameManager.swift */; };
 		F2D5F814231B024600B7706B /* CenterShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5F813231B024600B7706B /* CenterShapeLayer.swift */; };
 		F2D5F816231BDBF200B7706B /* ColorShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5F815231BDBF200B7706B /* ColorShapeLayer.swift */; };
+		F2D5F81B231C180700B7706B /* ColorShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5F81A231C180700B7706B /* ColorShapeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		F2D5F811231AD09800B7706B /* DebugFrameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugFrameManager.swift; sourceTree = "<group>"; };
 		F2D5F813231B024600B7706B /* CenterShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterShapeLayer.swift; sourceTree = "<group>"; };
 		F2D5F815231BDBF200B7706B /* ColorShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShapeLayer.swift; sourceTree = "<group>"; };
+		F2D5F81A231C180700B7706B /* ColorShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShapeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,9 +69,8 @@
 				F2D5F7FB231A840400B7706B /* AppDelegate.swift */,
 				F2D5F7FD231A840400B7706B /* MasterViewController.swift */,
 				F2D5F811231AD09800B7706B /* DebugFrameManager.swift */,
-				F2D5F80F231AB88700B7706B /* FrameShapeLayer.swift */,
-				F2D5F815231BDBF200B7706B /* ColorShapeLayer.swift */,
-				F2D5F813231B024600B7706B /* CenterShapeLayer.swift */,
+				F2D5F819231C17E700B7706B /* Views */,
+				F2D5F818231C17C200B7706B /* ShapeLayers */,
 				F2D5F7FF231A840400B7706B /* DetailViewController.swift */,
 				F2D5F801231A840400B7706B /* Main.storyboard */,
 				F2D5F804231A840500B7706B /* Assets.xcassets */,
@@ -77,6 +78,24 @@
 				F2D5F809231A840500B7706B /* Info.plist */,
 			);
 			path = DebugFrameView;
+			sourceTree = "<group>";
+		};
+		F2D5F818231C17C200B7706B /* ShapeLayers */ = {
+			isa = PBXGroup;
+			children = (
+				F2D5F80F231AB88700B7706B /* FrameShapeLayer.swift */,
+				F2D5F815231BDBF200B7706B /* ColorShapeLayer.swift */,
+				F2D5F813231B024600B7706B /* CenterShapeLayer.swift */,
+			);
+			path = ShapeLayers;
+			sourceTree = "<group>";
+		};
+		F2D5F819231C17E700B7706B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F2D5F81A231C180700B7706B /* ColorShapeView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +171,7 @@
 			files = (
 				F2D5F814231B024600B7706B /* CenterShapeLayer.swift in Sources */,
 				F2D5F812231AD09800B7706B /* DebugFrameManager.swift in Sources */,
+				F2D5F81B231C180700B7706B /* ColorShapeView.swift in Sources */,
 				F2D5F800231A840400B7706B /* DetailViewController.swift in Sources */,
 				F2D5F816231BDBF200B7706B /* ColorShapeLayer.swift in Sources */,
 				F2D5F810231AB88700B7706B /* FrameShapeLayer.swift in Sources */,

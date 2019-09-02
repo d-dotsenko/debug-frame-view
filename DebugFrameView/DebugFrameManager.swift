@@ -10,47 +10,56 @@ import UIKit
 
 class DebugFrameManager {
     
+    /// MARK: - Life Cicle
+    
     static let shared = DebugFrameManager()
     
     private init() {
         
     }
     
+    /// MARK: - Public VARs
+    
     var isDebug: Bool = false {
         didSet {
-            setup()
+            _setup()
         }
     }
     
     var isFrameLayer: Bool = true {
         didSet {
-            setup()
+            _setup()
         }
     }
     
     var isColorLayer: Bool = true {
         didSet {
-            setup()
+            _setup()
         }
     }
     
-    func setup() {
+    public func update() {
         let parentView = UIApplication.shared.keyWindow
         guard let allViews = parentView?.getAllViews() else {
             return
         }
         if isDebug {
-            _setupColorLayers(views: allViews, isOn: isColorLayer)
             _setupFrameLayers(views: allViews, isOn: isFrameLayer)
+            _setupColorLayers(views: allViews, isOn: isColorLayer)
         } else {
-            _setupColorLayers(views: allViews, isOn: false)
             _setupFrameLayers(views: allViews, isOn: false)
+            _setupColorLayers(views: allViews, isOn: false)
         }
-        
+    }
+    
+    /// MARK: - Private
+    
+    private func _setup() {
+        update()
         UIView.doSwizzle(isOn: isDebug)
     }
     
-    func _setupFrameLayers(views: [UIView], isOn: Bool) {
+    private func _setupFrameLayers(views: [UIView], isOn: Bool) {
         if isOn {
             _addFrameLayers(views: views)
         } else {
@@ -58,7 +67,7 @@ class DebugFrameManager {
         }
     }
     
-    func _setupColorLayers(views: [UIView], isOn: Bool) {
+    private func _setupColorLayers(views: [UIView], isOn: Bool) {
         if isOn {
             _addColorLayers(views: views)
         } else {
@@ -66,7 +75,9 @@ class DebugFrameManager {
         }
     }
     
-    func _addFrameLayers(views: [UIView]) {
+    
+    
+    private func _addFrameLayers(views: [UIView]) {
         views.forEach { (aView) in
             if aView.layer.sublayers?.filter({ (aLayer) in
                 if let _ = aLayer as? FrameShapeLayer {
@@ -82,7 +93,7 @@ class DebugFrameManager {
         }
     }
     
-    func _removeFrameLayers(views: [UIView]) {
+    private func _removeFrameLayers(views: [UIView]) {
         views.forEach { (aView) in
             aView.layer.sublayers?.forEach({ (aLayer) in
                 if let l = aLayer as? FrameShapeLayer {
@@ -92,8 +103,9 @@ class DebugFrameManager {
         }
     }
     
-    func _addColorLayers(views: [UIView]) {
+    private func _addColorLayers(views: [UIView]) {
         views.forEach { (aView) in
+            
             if aView.layer.sublayers?.filter({ (aLayer) in
                 if let _ = aLayer as? ColorShapeLayer {
                     return true
@@ -102,14 +114,20 @@ class DebugFrameManager {
             }).count ?? 0 > 0 {
                 return
             }
-            let randomColor = UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1)
-            let frameLayer = ColorShapeLayer(frame: aView.bounds, color: randomColor)
-            aView.layer.insertSublayer(frameLayer, at: 0)
+            
+            
+            let color = UIColor(red: CGFloat.random(in: 0...1),
+                                green: CGFloat.random(in: 0...1),
+                                blue: CGFloat.random(in: 0...1),
+                                alpha: 1)
+            
+            let colorLayer = ColorShapeLayer(frame: aView.bounds, color: color)
+            aView.layer.insertSublayer(colorLayer, at: 0)
+            print(aView.layer.sublayers)
         }
     }
     
-    func _removeColorLayers(views: [UIView]) {
-        let views = views.reversed()
+    private func _removeColorLayers(views: [UIView]) {
         views.forEach { (aView) in
             aView.layer.sublayers?.forEach({ (aLayer) in
                 if let l = aLayer as? ColorShapeLayer {
@@ -158,17 +176,7 @@ extension UIView {
     @objc func border_layoutSubviews() {
         self.border_layoutSubviews()
         
-        if layer.sublayers?.filter({ (aLayer) in
-            if let _ = aLayer as? FrameShapeLayer {
-                return true
-            }
-            return false
-        }).count ?? 0 > 0 {
-            return
-        }
-        
-        let frameLayer = FrameShapeLayer(frame: bounds)
-        layer.addSublayer(frameLayer)
+        DebugFrameManager.shared.update()
     }
 }
 

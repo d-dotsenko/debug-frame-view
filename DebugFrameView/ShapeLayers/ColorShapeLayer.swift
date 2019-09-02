@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ColorShapeLayer: CAShapeLayer {
+class ColorShapeLayer: CAGradientLayer {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -18,12 +18,18 @@ class ColorShapeLayer: CAShapeLayer {
     init(frame: CGRect, color: UIColor) {
         super.init()
         
-        getFramePath(frame: frame, color: color)
+        self.frame = frame
+        self.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        self.type = .radial
+        let center = CGPoint(x: 0.5, y: 0.5)
+        self.startPoint = center
+        
+        let radius = 3
+        self.endPoint = CGPoint(x: radius, y: radius)
     }
     
     func getFramePath(frame: CGRect, color:UIColor) {
         
-        let defaultLineWidth: CGFloat = 1
         let aPath = UIBezierPath()
         let points = [
             CGPoint(x: 0, y: 0),
@@ -44,9 +50,12 @@ class ColorShapeLayer: CAShapeLayer {
                 aPath.addLine(to: point)
             }
         }
-        path = aPath.cgPath
+//        path = aPath.cgPath
+        
 //        strokeColor = color.cgColor
 //        lineWidth = defaultLineWidth
-        fillColor = color.cgColor
+        
+//        fillColor = color.cgColor
+        
     }
 }
