@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F25517E62326E6B400311C4D /* DebugFrameDecorationShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25517E12326E6B400311C4D /* DebugFrameDecorationShape.swift */; };
+		F25517E72326E6B400311C4D /* DebugFrameDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25517E22326E6B400311C4D /* DebugFrameDecoration.swift */; };
+		F25517E82326E6B400311C4D /* DebugFrameDecorationColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25517E32326E6B400311C4D /* DebugFrameDecorationColor.swift */; };
+		F25517E92326E6B400311C4D /* DebugFrameDecorationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25517E42326E6B400311C4D /* DebugFrameDecorationLabel.swift */; };
+		F25517EA2326E6B400311C4D /* DebugFrameDecorationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25517E52326E6B400311C4D /* DebugFrameDecorationCenter.swift */; };
+		F25517EC2326E80300311C4D /* LabelTextLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25517EB2326E80300311C4D /* LabelTextLayer.swift */; };
 		F2D5F7FC231A840400B7706B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5F7FB231A840400B7706B /* AppDelegate.swift */; };
 		F2D5F7FE231A840400B7706B /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5F7FD231A840400B7706B /* MasterViewController.swift */; };
 		F2D5F800231A840400B7706B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D5F7FF231A840400B7706B /* DetailViewController.swift */; };
@@ -21,6 +27,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F25517E12326E6B400311C4D /* DebugFrameDecorationShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameDecorationShape.swift; sourceTree = "<group>"; };
+		F25517E22326E6B400311C4D /* DebugFrameDecoration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameDecoration.swift; sourceTree = "<group>"; };
+		F25517E32326E6B400311C4D /* DebugFrameDecorationColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameDecorationColor.swift; sourceTree = "<group>"; };
+		F25517E42326E6B400311C4D /* DebugFrameDecorationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameDecorationLabel.swift; sourceTree = "<group>"; };
+		F25517E52326E6B400311C4D /* DebugFrameDecorationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameDecorationCenter.swift; sourceTree = "<group>"; };
+		F25517EB2326E80300311C4D /* LabelTextLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelTextLayer.swift; sourceTree = "<group>"; };
 		F2D5F7F8231A840400B7706B /* DebugFrameView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DebugFrameView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D5F7FB231A840400B7706B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2D5F7FD231A840400B7706B /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +59,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F25517E02326E6B400311C4D /* DebugFrameDecoration */ = {
+			isa = PBXGroup;
+			children = (
+				F25517E12326E6B400311C4D /* DebugFrameDecorationShape.swift */,
+				F25517E22326E6B400311C4D /* DebugFrameDecoration.swift */,
+				F25517E32326E6B400311C4D /* DebugFrameDecorationColor.swift */,
+				F25517E42326E6B400311C4D /* DebugFrameDecorationLabel.swift */,
+				F25517E52326E6B400311C4D /* DebugFrameDecorationCenter.swift */,
+			);
+			path = DebugFrameDecoration;
+			sourceTree = "<group>";
+		};
 		F2D5F7EF231A840400B7706B = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +93,7 @@
 				F2D5F7FB231A840400B7706B /* AppDelegate.swift */,
 				F2D5F7FD231A840400B7706B /* MasterViewController.swift */,
 				F2D5F811231AD09800B7706B /* DebugFrameManager.swift */,
+				F25517E02326E6B400311C4D /* DebugFrameDecoration */,
 				F2D5F819231C17E700B7706B /* Views */,
 				F2D5F818231C17C200B7706B /* ShapeLayers */,
 				F2D5F7FF231A840400B7706B /* DetailViewController.swift */,
@@ -83,6 +108,7 @@
 		F2D5F818231C17C200B7706B /* ShapeLayers */ = {
 			isa = PBXGroup;
 			children = (
+				F25517EB2326E80300311C4D /* LabelTextLayer.swift */,
 				F2D5F80F231AB88700B7706B /* FrameShapeLayer.swift */,
 				F2D5F815231BDBF200B7706B /* ColorShapeLayer.swift */,
 				F2D5F813231B024600B7706B /* CenterShapeLayer.swift */,
@@ -169,12 +195,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F25517E82326E6B400311C4D /* DebugFrameDecorationColor.swift in Sources */,
+				F25517EC2326E80300311C4D /* LabelTextLayer.swift in Sources */,
 				F2D5F814231B024600B7706B /* CenterShapeLayer.swift in Sources */,
 				F2D5F812231AD09800B7706B /* DebugFrameManager.swift in Sources */,
+				F25517EA2326E6B400311C4D /* DebugFrameDecorationCenter.swift in Sources */,
+				F25517E62326E6B400311C4D /* DebugFrameDecorationShape.swift in Sources */,
 				F2D5F81B231C180700B7706B /* ColorShapeView.swift in Sources */,
 				F2D5F800231A840400B7706B /* DetailViewController.swift in Sources */,
 				F2D5F816231BDBF200B7706B /* ColorShapeLayer.swift in Sources */,
 				F2D5F810231AB88700B7706B /* FrameShapeLayer.swift in Sources */,
+				F25517E92326E6B400311C4D /* DebugFrameDecorationLabel.swift in Sources */,
+				F25517E72326E6B400311C4D /* DebugFrameDecoration.swift in Sources */,
 				F2D5F7FE231A840400B7706B /* MasterViewController.swift in Sources */,
 				F2D5F7FC231A840400B7706B /* AppDelegate.swift in Sources */,
 			);

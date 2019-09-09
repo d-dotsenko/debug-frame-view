@@ -38,17 +38,33 @@ class DebugFrameManager {
         }
     }
     
+    var isCenterLayer: Bool = false {
+        didSet {
+            _setup()
+        }
+    }
+    
+    var isLabelLayer: Bool = false {
+        didSet {
+            _setup()
+        }
+    }
+    
     public func update() {
         let parentView = UIApplication.shared.keyWindow
         guard let allViews = parentView?.getAllViews() else {
             return
         }
         if isDebug {
-            _setupFrameLayers(views: allViews, isOn: isFrameLayer)
-            _setupColorLayers(views: allViews, isOn: isColorLayer)
+            DebugFrameDecorationShape.setup(views: allViews, isOn: isFrameLayer)
+            DebugFrameDecorationColor.setup(views: allViews, isOn: isColorLayer)
+            DebugFrameDecorationCenter.setup(views: allViews, isOn: isCenterLayer)
+            DebugFrameDecorationLabel.setup(views: allViews, isOn: isLabelLayer)
         } else {
-            _setupFrameLayers(views: allViews, isOn: false)
-            _setupColorLayers(views: allViews, isOn: false)
+            DebugFrameDecorationShape.setup(views: allViews, isOn: false)
+            DebugFrameDecorationColor.setup(views: allViews, isOn: false)
+            DebugFrameDecorationCenter.setup(views: allViews, isOn: false)
+            DebugFrameDecorationLabel.setup(views: allViews, isOn: false)
         }
     }
     
@@ -59,97 +75,29 @@ class DebugFrameManager {
         UIView.doSwizzle(isOn: isDebug)
     }
     
-    private func _setupFrameLayers(views: [UIView], isOn: Bool) {
-        if isOn {
-            _addFrameLayers(views: views)
-        } else {
-            _removeFrameLayers(views: views)
-        }
-    }
-    
-    private func _setupColorLayers(views: [UIView], isOn: Bool) {
-        if isOn {
-            _addColorLayers(views: views)
-        } else {
-            _removeColorLayers(views: views)
-        }
-    }
-    
-    
-    
-    private func _addFrameLayers(views: [UIView]) {
-        views.forEach { (aView) in
-            if aView.layer.sublayers?.filter({ (aLayer) in
-                if let _ = aLayer as? FrameShapeLayer {
-                    return true
-                }
-                return false
-            }).count ?? 0 > 0 {
-                return
-            }
-            
-            let frameLayer = FrameShapeLayer(frame: aView.bounds)
-            aView.layer.addSublayer(frameLayer)
-        }
-    }
-    
-    private func _removeFrameLayers(views: [UIView]) {
-        views.forEach { (aView) in
-            aView.layer.sublayers?.forEach({ (aLayer) in
-                if let l = aLayer as? FrameShapeLayer {
-                    l.removeFromSuperlayer()
-                }
-            })
-        }
-    }
-    
-    private func _addColorLayers(views: [UIView]) {
-        views.forEach { (aView) in
-            
-            if aView.layer.sublayers?.filter({ (aLayer) in
-                if let _ = aLayer as? ColorShapeLayer {
-                    return true
-                }
-                return false
-            }).count ?? 0 > 0 {
-                return
-            }
-            
-            
-            let color = UIColor(red: CGFloat.random(in: 0...1),
-                                green: CGFloat.random(in: 0...1),
-                                blue: CGFloat.random(in: 0...1),
-                                alpha: 1)
-            
-            let colorLayer = ColorShapeLayer(frame: aView.bounds, color: color)
-            aView.layer.insertSublayer(colorLayer, at: 0)
-            print(aView.layer.sublayers)
-        }
-    }
-    
-    private func _removeColorLayers(views: [UIView]) {
-        views.forEach { (aView) in
-            aView.layer.sublayers?.forEach({ (aLayer) in
-                if let l = aLayer as? ColorShapeLayer {
-                    l.removeFromSuperlayer()
-                }
-            })
-        }
-    }
 }
 
 extension UIView {
+    
     func getAllViews() -> [UIView] {
         var allViews = [UIView]()
-        let closure: (UIView) -> Void = { aView in
+        for aView in subviews {
+            allViews += aView.getAllViews()
             allViews.append(aView)
-            for sub in aView.subviews {
-                allViews += sub.getAllViews()
-            }
         }
-        closure(self)
         return allViews
     }
+    //    func getAllViews() -> [UIView] {
+    //        var allViews = [UIView]()
+    //        let closure: (UIView) -> Void = { aView in
+    //            allViews.append(aView)
+    //            for sub in aView.subviews {
+    //                allViews += sub.getAllViews()
+    //            }
+    //        }
+    //        closure(self)
+    //        return allViews
+    //    }
 }
 
 private let swizzling:(UIView.Type, Bool) -> () = { aView, isOn in
@@ -177,6 +125,37 @@ extension UIView {
         self.border_layoutSubviews()
         
         DebugFrameManager.shared.update()
+    }
+    
+    @objc func border_removeFromSuperview() {
+        self.border_removeFromSuperview()
+        
+        let views = getAllViews()
+        
+        views.forEach { (aView) in
+            aView.layer.sublayers?.forEach({ (aLayer) in
+                if let l = aLayer as? ColorShapeLayer {
+                    l.removeFromSuperlayer()
+                }
+            })
+        }
+    }
+}
+
+extension UIView {
+    
+    func getDepthOfView(view: UIView, pDepth: Int) -> Int {
+        
+        let subviews = view.subviews
+        if subviews.count == 0 {
+            return pDepth
+        }
+        
+        for v in subviews {
+            return getDepthOfView(view: v, pDepth: pDepth + 1)
+        }
+        
+        return pDepth
     }
 }
 
