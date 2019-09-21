@@ -15,6 +15,9 @@ class DetailViewController: UIViewController {
 
     func configureView() {
         // Update the user interface for the detail item.
+        let isSwitchOn = DebugFrameManager.shared.isDebug
+        navigationItem.rightBarButtonItem = getSwitchItem(selector: #selector(switchValueDidChange(sender:)), isOn: isSwitchOn)
+        
         if let detail = detailItem {
             if let label = detailDescriptionLabel {
                 label.text = detail.description
@@ -27,6 +30,12 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         configureView()
     }
+    
+    @objc func switchValueDidChange(sender: UISwitch) {
+        
+        DebugFrameManager.shared.isDebug = sender.isOn
+        
+    }
 
     var detailItem: NSDate? {
         didSet {
@@ -34,7 +43,6 @@ class DetailViewController: UIViewController {
             configureView()
         }
     }
-
 
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F24D9C6823366C7C00C7DCC9 /* DebugFrameViewControllerExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24D9C6723366C7C00C7DCC9 /* DebugFrameViewControllerExtention.swift */; };
 		F25517E62326E6B400311C4D /* DebugFrameDecorationShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25517E12326E6B400311C4D /* DebugFrameDecorationShape.swift */; };
 		F25517E72326E6B400311C4D /* DebugFrameDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25517E22326E6B400311C4D /* DebugFrameDecoration.swift */; };
 		F25517E82326E6B400311C4D /* DebugFrameDecorationColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25517E32326E6B400311C4D /* DebugFrameDecorationColor.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F24D9C6723366C7C00C7DCC9 /* DebugFrameViewControllerExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugFrameViewControllerExtention.swift; sourceTree = "<group>"; };
 		F25517E12326E6B400311C4D /* DebugFrameDecorationShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameDecorationShape.swift; sourceTree = "<group>"; };
 		F25517E22326E6B400311C4D /* DebugFrameDecoration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameDecoration.swift; sourceTree = "<group>"; };
 		F25517E32326E6B400311C4D /* DebugFrameDecorationColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameDecorationColor.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 		F2D5F7FA231A840400B7706B /* DebugFrameView */ = {
 			isa = PBXGroup;
 			children = (
+				F24D9C6723366C7C00C7DCC9 /* DebugFrameViewControllerExtention.swift */,
 				F2D5F7FB231A840400B7706B /* AppDelegate.swift */,
 				F2D5F7FD231A840400B7706B /* MasterViewController.swift */,
 				F2D5F811231AD09800B7706B /* DebugFrameManager.swift */,
@@ -208,6 +211,7 @@
 				F25517E92326E6B400311C4D /* DebugFrameDecorationLabel.swift in Sources */,
 				F25517E72326E6B400311C4D /* DebugFrameDecoration.swift in Sources */,
 				F2D5F7FE231A840400B7706B /* MasterViewController.swift in Sources */,
+				F24D9C6823366C7C00C7DCC9 /* DebugFrameViewControllerExtention.swift in Sources */,
 				F2D5F7FC231A840400B7706B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

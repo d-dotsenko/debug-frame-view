@@ -17,7 +17,8 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        navigationItem.leftBarButtonItem = getSwitchItem()
+        let isSwitchOn = DebugFrameManager.shared.isDebug
+        navigationItem.leftBarButtonItem = getSwitchItem(selector: #selector(switchValueDidChange(sender:)), isOn: isSwitchOn)
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         navigationItem.rightBarButtonItem = addButton
@@ -25,12 +26,6 @@ class MasterViewController: UITableViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
-    }
-    
-    func getSwitchItem() -> UIBarButtonItem {
-        let switchControl = UISwitch(frame: CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 50, height: 30)))
-        switchControl.addTarget(self, action: #selector(switchValueDidChange(sender:)), for: .valueChanged)
-        return UIBarButtonItem.init(customView: switchControl)
     }
     
     @objc func switchValueDidChange(sender: UISwitch) {

@@ -23,6 +23,7 @@ class DebugFrameManager {
     var isDebug: Bool = false {
         didSet {
             _setup()
+            UIView.doSwizzle(isOn: isDebug)
         }
     }
     
@@ -55,16 +56,20 @@ class DebugFrameManager {
         guard let allViews = parentView?.getAllViews() else {
             return
         }
+        updateForViews(views: allViews)
+    }
+    
+    public func updateForViews(views: [UIView]) {
         if isDebug {
-            DebugFrameDecorationShape.setup(views: allViews, isOn: isFrameLayer)
-            DebugFrameDecorationColor.setup(views: allViews, isOn: isColorLayer)
-            DebugFrameDecorationCenter.setup(views: allViews, isOn: isCenterLayer)
-            DebugFrameDecorationLabel.setup(views: allViews, isOn: isLabelLayer)
+            DebugFrameDecorationShape.setup(views: views, isOn: isFrameLayer)
+            DebugFrameDecorationColor.setup(views: views, isOn: isColorLayer)
+            DebugFrameDecorationCenter.setup(views: views, isOn: isCenterLayer)
+            DebugFrameDecorationLabel.setup(views: views, isOn: isLabelLayer)
         } else {
-            DebugFrameDecorationShape.setup(views: allViews, isOn: false)
-            DebugFrameDecorationColor.setup(views: allViews, isOn: false)
-            DebugFrameDecorationCenter.setup(views: allViews, isOn: false)
-            DebugFrameDecorationLabel.setup(views: allViews, isOn: false)
+            DebugFrameDecorationShape.setup(views: views, isOn: false)
+            DebugFrameDecorationColor.setup(views: views, isOn: false)
+            DebugFrameDecorationCenter.setup(views: views, isOn: false)
+            DebugFrameDecorationLabel.setup(views: views, isOn: false)
         }
     }
     
@@ -72,7 +77,7 @@ class DebugFrameManager {
     
     private func _setup() {
         update()
-        UIView.doSwizzle(isOn: isDebug)
+//        UIView.doSwizzle(isOn: isDebug)
     }
     
 }
@@ -87,17 +92,6 @@ extension UIView {
         }
         return allViews
     }
-    //    func getAllViews() -> [UIView] {
-    //        var allViews = [UIView]()
-    //        let closure: (UIView) -> Void = { aView in
-    //            allViews.append(aView)
-    //            for sub in aView.subviews {
-    //                allViews += sub.getAllViews()
-    //            }
-    //        }
-    //        closure(self)
-    //        return allViews
-    //    }
 }
 
 private let swizzling:(UIView.Type, Bool) -> () = { aView, isOn in
@@ -124,7 +118,7 @@ extension UIView {
     @objc func border_layoutSubviews() {
         self.border_layoutSubviews()
         
-        DebugFrameManager.shared.update()
+        DebugFrameManager.shared.updateForViews(views: [self])
     }
     
     @objc func border_removeFromSuperview() {
